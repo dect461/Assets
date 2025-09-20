@@ -7,7 +7,7 @@ public class Tree : MonoBehaviour
     private int xBoard = -1;
     private int yBoard = -1;
 
-    public Sprite tree1_0, tree1_1, tree1_2, tree1_3, tree1_4, tree1_5, tree1_6, tree1_7;
+    public Sprite tree1_0, tree1_1, tree1_2, tree1_3, tree1_4, tree1_5, tree1_6, tree1_7, tree1_8, tree1_9, tree1_10, tree1_11, tree1_12, tree1_13, tree1_14;
 
     public void Activate()
     {
@@ -25,6 +25,13 @@ public class Tree : MonoBehaviour
             case "tree1_5": this.GetComponent<SpriteRenderer>().sprite = tree1_5; break;
             case "tree1_6": this.GetComponent<SpriteRenderer>().sprite = tree1_6; break;
             case "tree1_7": this.GetComponent<SpriteRenderer>().sprite = tree1_7; break;
+            case "tree1_8": this.GetComponent<SpriteRenderer>().sprite = tree1_8; break;
+            case "tree1_9": this.GetComponent<SpriteRenderer>().sprite = tree1_9; break;
+            case "tree1_10": this.GetComponent<SpriteRenderer>().sprite = tree1_10; break;
+            case "tree1_11": this.GetComponent<SpriteRenderer>().sprite = tree1_11; break;
+            case "tree1_12": this.GetComponent<SpriteRenderer>().sprite = tree1_12; break;
+            case "tree1_13": this.GetComponent<SpriteRenderer>().sprite = tree1_13; break;
+            case "tree1_14": this.GetComponent<SpriteRenderer>().sprite = tree1_14; break;
         }
 
 

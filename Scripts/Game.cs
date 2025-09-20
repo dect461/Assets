@@ -10,10 +10,9 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject tree;
 
     private GameObject[,] positions = new GameObject[8, 8];
-    private GameObject[] playerBlack = new GameObject[16];
     private GameObject[] playerWhite = new GameObject[16];
-    private GameObject[] trees = new GameObject[10];
-    private string[] treesName = new string[10];
+    private GameObject[] trees = new GameObject[14];
+    private string[] treesName = new string[14];
 
     private string currentPlayer = "white";
 
@@ -32,40 +31,38 @@ public class Game : MonoBehaviour
             Create("white_pawn", 1, 6), Create("white_pawn", 1, 7)
         };
 
-        playerBlack = new GameObject[]
-        {
-            Create("black_rook", 7,0), Create("black_knight", 7,1),
-            Create("black_bishop", 7,2), Create("black_queen", 7,3),
-            Create("black_king", 7,4), Create("black_bishop", 7,5),
-            Create("black_knight", 7,6), Create("black_rook", 7,7),
-            Create("black_pawn", 6, 0), Create("black_pawn", 6, 1),
-            Create("black_pawn", 6, 2), Create("black_pawn", 6, 3),
-            Create("black_pawn", 6, 4), Create("black_pawn", 6, 5),
-            Create("black_pawn", 6, 6), Create("black_pawn", 6, 7)
-        };
+        string RandomIntToStr = Mathf.RoundToInt(UnityEngine.Random.RandomRange(1000000, 9999999)).ToString() + Mathf.RoundToInt(UnityEngine.Random.RandomRange(1000000, 9999999)).ToString();;
 
         for (int  i = 0; i < treesName.Length; i++)
         {
-            treesName[i] = "tree1_" + Mathf.RoundToInt(UnityEngine.Random.Range(0, 11)).ToString(); 
+            Debug.Log(i.ToString() + " " + RandomIntToStr);
+            treesName[i] = "tree1_" + RandomIntToStr[i];
+            Debug.Log(i.ToString() + " " + RandomIntToStr);
         }
         
+
+        //Подумать как улучшить систему со слоями, пока обойдемся так
+
         trees = new GameObject[]
         {
-            CreateTree(treesName[0], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 1),
-            CreateTree(treesName[1], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 2),
-            CreateTree(treesName[2], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 3),
-            CreateTree(treesName[3], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 3),
-            CreateTree(treesName[4], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 4),
-            CreateTree(treesName[5], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 5),
-            CreateTree(treesName[6], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 6),
-            CreateTree(treesName[7], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 7),
-            CreateTree(treesName[8], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 8),
-            CreateTree(treesName[9], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 8),
+            CreateTree(treesName[0], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 1,9),
+            CreateTree(treesName[1], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 2,8),
+            CreateTree(treesName[2], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 3,7),
+            CreateTree(treesName[3], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 3,7),
+            CreateTree(treesName[4], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 4,6),
+            CreateTree(treesName[5], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 5,5),
+            CreateTree(treesName[6], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 6,4),
+            CreateTree(treesName[7], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 7,3),
+            CreateTree(treesName[8], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 8,2),
+            CreateTree(treesName[9], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 8,2),
+            CreateTree(treesName[10], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 9,1),
+            CreateTree(treesName[11], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 9,1),
+            CreateTree(treesName[12], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 0,10),
+            CreateTree(treesName[13], Mathf.RoundToInt(UnityEngine.Random.Range(9,13)), 0,10),
         };
 
-        for (int i = 0; i < playerBlack.Length; i++)
+        for (int i = 0; i < playerWhite.Length; i++)
         {
-            SetPosition(playerBlack[i]);
             SetPosition(playerWhite[i]);
         }
         //Instantiate(chessPiece, new Vector3(0,0,-1), Quaternion.identity);
@@ -83,12 +80,14 @@ public class Game : MonoBehaviour
         return obj;
     }
 
-    public GameObject CreateTree(string name, int x, int y)
+    public GameObject CreateTree(string name, int x, int y, int layer)
     {
         GameObject obj = Instantiate(tree, new Vector3(0, 0, -1), Quaternion.identity);
         Tree tr = obj.GetComponent<Tree>();
         Transform scaleTree = obj.GetComponent<Transform>();
-        float scaleF = UnityEngine.Random.Range(3, 6);
+        SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+        spriteRenderer.sortingOrder = layer;
+        float scaleF = UnityEngine.Random.Range(4, 6);
         scaleTree.localScale = new Vector3(scaleF, scaleF, 1);
         tr.name = name;
         tr.SetXBoard(x);
