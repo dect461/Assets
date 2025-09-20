@@ -1,14 +1,19 @@
 using TMPro;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     [SerializeField] GameObject chessPiece;
+    [SerializeField] GameObject tree;
 
     private GameObject[,] positions = new GameObject[8, 8];
     private GameObject[] playerBlack = new GameObject[16];
     private GameObject[] playerWhite = new GameObject[16];
+    private GameObject[] trees = new GameObject[10];
+    private string[] treesName = new string[10];
 
     private string currentPlayer = "white";
 
@@ -39,6 +44,25 @@ public class Game : MonoBehaviour
             Create("black_pawn", 6, 6), Create("black_pawn", 6, 7)
         };
 
+        for (int  i = 0; i < treesName.Length; i++)
+        {
+            treesName[i] = "tree1_" + Mathf.RoundToInt(UnityEngine.Random.Range(0, 11)).ToString(); 
+        }
+        
+        trees = new GameObject[]
+        {
+            CreateTree(treesName[0], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 1),
+            CreateTree(treesName[1], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 2),
+            CreateTree(treesName[2], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 3),
+            CreateTree(treesName[3], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 3),
+            CreateTree(treesName[4], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 4),
+            CreateTree(treesName[5], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 5),
+            CreateTree(treesName[6], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 6),
+            CreateTree(treesName[7], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 7),
+            CreateTree(treesName[8], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 8),
+            CreateTree(treesName[9], Mathf.RoundToInt(UnityEngine.Random.Range(8,12)), 8),
+        };
+
         for (int i = 0; i < playerBlack.Length; i++)
         {
             SetPosition(playerBlack[i]);
@@ -56,6 +80,20 @@ public class Game : MonoBehaviour
         cm.SetXBoard(x);
         cm.SetYBoard(y);
         cm.Activate();
+        return obj;
+    }
+
+    public GameObject CreateTree(string name, int x, int y)
+    {
+        GameObject obj = Instantiate(tree, new Vector3(0, 0, -1), Quaternion.identity);
+        Tree tr = obj.GetComponent<Tree>();
+        Transform scaleTree = obj.GetComponent<Transform>();
+        float scaleF = UnityEngine.Random.Range(3, 6);
+        scaleTree.localScale = new Vector3(scaleF, scaleF, 1);
+        tr.name = name;
+        tr.SetXBoard(x);
+        tr.SetYBoard(y);
+        tr.Activate();
         return obj;
     }
 

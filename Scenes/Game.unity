@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chessPiece: {fileID: 4190484176960304758, guid: 31502d90f9993e34f87b90e28859ef34, type: 3}
+  tree: {fileID: 959657139663976883, guid: 7499c3596a7299e49a8a94881e47147c, type: 3}
 --- !u!4 &370399379
 Transform:
   m_ObjectHideFlags: 0
