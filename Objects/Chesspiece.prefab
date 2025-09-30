@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9024184035357332697}
   - component: {fileID: 5162052256000574699}
   - component: {fileID: -593651433173532021}
+  - component: {fileID: -1195948016889374739}
   m_Layer: 0
   m_Name: Chesspiece
   m_TagString: Untagged
@@ -103,12 +104,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   movePlate: {fileID: 4692675477297157541, guid: 1f8a94fde0139ed429b3788a1a3ae95a, type: 3}
-  black_queen: {fileID: -2628853326628446179, guid: 99d282bf809d69947b879f11ad9485e3, type: 3}
-  black_knight: {fileID: -334450713805299198, guid: 1dc0938644b83bd4cbed81d09bf2e418, type: 3}
-  black_bishop: {fileID: -6414592721767173361, guid: 005e4fa2f83b8da4c9c354068d0d2fc1, type: 3}
-  black_king: {fileID: -641104846605737351, guid: fcae452c54747fd4d88e65c5059ad0be, type: 3}
-  black_rook: {fileID: -7587791273309554880, guid: dcd0dbcc0e6905a408941f1d08896a92, type: 3}
-  black_pawn: {fileID: -4341603147912474925, guid: 03898628d9cf1ed4c9e66deacd8a2f7c, type: 3}
   white_queen: {fileID: 7270707491364550308, guid: 53b56686109b43d4588468f7b88fec76, type: 3}
   white_knight: {fileID: 8769669200613306614, guid: 296273fba7d8c1d449aa305f077701cf, type: 3}
   white_bishop: {fileID: 7560534232159598683, guid: 63c04c88dde78af4e8fb627aad113047, type: 3}
@@ -145,11 +140,11 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.019607455, y: -0.000000037252903}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,5 +154,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 0.2448324, y: 0.20718302}
   m_EdgeRadius: 0
+--- !u!114 &-1195948016889374739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4190484176960304758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92271f65ba3f8453cacbb79dfd3ac004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 5

@@ -1,11 +1,10 @@
-using TMPro.EditorUtilities;
-using Unity.Collections;
 using UnityEngine;
 
 public class ChessMan : MonoBehaviour
 {
     public GameObject controller;
     public GameObject movePlate;
+    private bool IsMouseDown;
 
     private int xBoard = -1;
     private int yBoard = -1;
@@ -15,12 +14,10 @@ public class ChessMan : MonoBehaviour
     public void Activate()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
-
         SetCoords();
 
         switch (this.name)
         {
-
             case "white_queen": this.GetComponent<SpriteRenderer>().sprite = white_queen; break;
             case "white_knight": this.GetComponent<SpriteRenderer>().sprite = white_knight; break;
             case "white_bishop": this.GetComponent<SpriteRenderer>().sprite = white_bishop; break;
@@ -28,9 +25,8 @@ public class ChessMan : MonoBehaviour
             case "white_rook": this.GetComponent<SpriteRenderer>().sprite = white_rook; break;
             case "white_pawn": this.GetComponent<SpriteRenderer>().sprite = white_pawn; break;
         }
-    
-    
     }
+
     public void SetCoords()
     {
         float x = xBoard;
@@ -51,22 +47,40 @@ public class ChessMan : MonoBehaviour
     public void SetXBoard(int x) { xBoard = x; }
     public void SetYBoard(int y) { yBoard = y; }
 
-    private void OnMouseUp()
+    private void Update()
     {
+        if (IsMouseDown)
+        {
+            if (!controller.GetComponent<Game>().IsGameOver())
+            {
+                DestroyMovePlates();
+                InitiateMovePlates();
+            }
+        }
+    }
+
+    public void OnMouseDown()
+    {
+        IsMouseDown = true;
+        Debug.Log("Clicked on figure: " + name);
 
         if (!controller.GetComponent<Game>().IsGameOver())
         {
             DestroyMovePlates();
-
             InitiateMovePlates();
         }
+    }
+
+    public void OnMouseUp()
+    {
+        IsMouseDown = false;
     }
 
     public void DestroyMovePlates()
     {
         GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
-        
-        for (int i = 0; i < movePlates.Length; i++) 
+
+        for (int i = 0; i < movePlates.Length; i++)
         {
             Destroy(movePlates[i]);
         }
@@ -106,11 +120,10 @@ public class ChessMan : MonoBehaviour
                 LineMovePlate(0, -1);
                 break;
             case "white_pawn":
-                PawnMovePlate(xBoard+1,yBoard);
+                PawnMovePlate(xBoard + 1, yBoard);
+                PawnMovePlate(xBoard - 1, yBoard);
                 break;
-        
         }
-        
     }
 
     public void LineMovePlate(int xIncrement, int yIncrement)
@@ -126,11 +139,6 @@ public class ChessMan : MonoBehaviour
             x += xIncrement;
             y += yIncrement;
         }
-        //Сделать так чтобы враги подсвечивали клетки
-        //if (sc.PositionOnBoard(x, y) && sc.GetPosition(x, y).GetComponent<ChessMan>().player != player)
-        //{
-        //    MovePlateAttackSpawn(x,y);
-        //}
     }
 
     public void LMovePlate()
@@ -145,7 +153,7 @@ public class ChessMan : MonoBehaviour
         PointMovePlate(xBoard - 2, yBoard - 1);
     }
 
-    public void SurroundMovePlate ()
+    public void SurroundMovePlate()
     {
         PointMovePlate(xBoard, yBoard + 1);
         PointMovePlate(xBoard, yBoard - 1);
@@ -168,13 +176,7 @@ public class ChessMan : MonoBehaviour
             {
                 MovePlateSpawn(x, y);
             }
-            //Сделать так чтобы враги подсвечивали клетки
-            //else if (cp.GetComponent<ChessMan>().player != player)
-            //{
-            //    MovePlateAttackSpawn(x, y);
-            //}
         }
-
     }
 
     public void PawnMovePlate(int x, int y)
@@ -186,18 +188,6 @@ public class ChessMan : MonoBehaviour
             {
                 MovePlateSpawn(x, y);
             }
-            //Сделать так чтобы враги подсвечивали клетки
-            //if (sc.PositionOnBoard(x, y + 1) && sc.GetPosition(x, y + 1) != null
-            //    && sc.GetPosition(x, y + 1).GetComponent<ChessMan>().player != player)
-            //{
-            //    MovePlateAttackSpawn(x , y+1);
-            //}
-
-            //if (sc.PositionOnBoard(x, y -1) && sc.GetPosition(x, y - 1) != null
-            //    && sc.GetPosition(x, y - 1).GetComponent<ChessMan>().player != player)
-            //{
-            //    MovePlateAttackSpawn(x, y - 1);
-            //}
         }
     }
 
@@ -214,31 +204,9 @@ public class ChessMan : MonoBehaviour
         y += -3.90f;
 
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3f), Quaternion.identity);
-        
-        MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.SetReference(gameObject);
-        mpScript.SetCoords(matrixX, matrixY); // Может наоборот x y
-
-    }
-
-    public void MovePlateAttackSpawn(int matrixX, int matrixY)
-    {
-        float x = matrixX;
-        float y = matrixY;
-
-        x *= 1.12f;
-        y *= 1.12f;
-
-        x += -3.90f;
-        y += -3.90f;
-
-        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3f), Quaternion.identity);
 
         MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.attack = true;
         mpScript.SetReference(gameObject);
-        mpScript.SetCoords(matrixX, matrixY); // Может наоборот x y
-
+        mpScript.SetCoords(matrixX, matrixY);
     }
-}       
-        
+}

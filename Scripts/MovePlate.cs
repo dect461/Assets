@@ -1,37 +1,37 @@
 using UnityEngine;
 
-public class MovePlate: MonoBehaviour 
+public class MovePlate : MonoBehaviour
 {
     public GameObject controller;
-    
+    private GameObject enemy = null;
+
     GameObject reference = null;
-    
+
     int matrixX;
     int matrixY;
 
     public bool attack = false;
 
-    public void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (attack)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
-
-        }
+        enemy = collision.gameObject;
+        attack = true;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 0f, 0f, 1f);
     }
 
-    public void OnMouseUp()
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        enemy = null;
+        attack = false;
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    public void OnMouseDown()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
         if (attack)
         {
-            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
-
-            if (cp.name == "white_king") controller.GetComponent<Game>().Winner("black");
-            if (cp.name == "black_king") controller.GetComponent<Game>().Winner("white");
-
-
-            Destroy(cp);
+            Destroy(enemy);
         }
 
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<ChessMan>().GetXBoard(), reference.GetComponent<ChessMan>().GetYBoard());
@@ -41,8 +41,6 @@ public class MovePlate: MonoBehaviour
         reference.GetComponent<ChessMan>().SetCoords();
 
         controller.GetComponent<Game>().SetPosition(reference);
-
-        controller.GetComponent<Game>().NextTurn();
 
         reference.GetComponent<ChessMan>().DestroyMovePlates();
     }

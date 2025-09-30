@@ -112,12 +112,12 @@ TextureImporter:
       name: theknightwalkingpixel_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 2
-        width: 14
-        height: 27
+        x: 9
+        y: 3
+        width: 12
+        height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: theknightwalkingpixel_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 1
-        width: 15
-        height: 28
+        x: 39
+        y: 2
+        width: 13
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: theknightwalkingpixel_2
       rect:
         serializedVersion: 2
-        x: 67
-        y: 1
-        width: 16
-        height: 28
+        x: 68
+        y: 2
+        width: 14
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: theknightwalkingpixel_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 1
-        width: 17
-        height: 28
+        x: 97
+        y: 2
+        width: 15
+        height: 26
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 165f38e62f1115e48ad410cb366d8f5b
     internalID: 0
     vertices: []
     indices: 
@@ -208,7 +208,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       theknightwalkingpixel_0: -565115105889008062
       theknightwalkingpixel_1: -3493857712541229919
